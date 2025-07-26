@@ -45,7 +45,7 @@ text
 CONFIG_SND_SIMPLE_CARD=n
 CONFIG_SND_SOC_HDMI_CODEC=n 
 
-# Doing this makes sure alsa does not steal major numbers during steam running only disabled soC if your using an 3mm audio jack hat.
+# Doing this makes sure alsa does not steal major numbers during steam running only disabled SoC Audio support if your using an 3mm audio jack hat.
 
 # Full Tutorial
 Install Dependencies for recompiling the linux kernel
