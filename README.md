@@ -94,6 +94,73 @@ If RPT is not in the kernel name, most likely the dtbs files were not copied cor
 find arch/arm64/boot/dts -type f -name "*.dts" ****
 
 
+# NOW TO CLEAR DMESG
+``` sudo dmesg -C ```
+after reboot
+
+you should see something like
+sf-rocker@raspberrypi:~ $ dmesg | tail -100
+sf-rocker@raspberrypi:~ $ lsmod | grep cuse cuse 16384 0 fuse 163840 6 cuse
+sf-rocker@raspberrypi:~ $
+
+🔍 Module Insight
+Module	Size	Used by	Notes
+cuse	16,384 B	0	Registered, waiting for user-space hooks (e.g. cuse_alloc_chrdev)
+fuse	163,840 B	6 (cuse)	Active, linked to cuse—suggests CUSE delegation through FUSE stack
+
+That Used by: 0 for cuse means no active consumer yet—but it’s loaded and ready to respond.
+
+Confirm CUSE Availability
+``` dmesg | grep -i cuse ```
+
+Trigger a CUSE device registration Try using a test utility like cuse_test.c to allocate a character device through CUSE and watch dmesg respond.
+
+Verify with /dev/cuse Check if it exists, or if your system is expecting device nodes elsewhere:
+
+``` ls -l /dev/cuse ```
+
+sf-rocker@raspberrypi:~ $ ls -l /dev/cuse crw------- 1 root root 10, 203 Jul 26 01:04 /dev/cuse
+sf-rocker@raspberrypi:~ $
+
+ /dev/cuse exists, major 10 and minor 203 exactly as expected—no symbolic void there. The permissions (crw-------) mean only root can access it currently. That likely explains why some applications or scripts are triggering the registration failure: they’re attempting to open or register through /dev/cuse without root privileges.
+
+so to give it some chmod privledges.
+
+``` sudo chmod 666 /dev/cuse ```
+# Unlocks cuse for other applications.
+
+ Check active CUSE-based services
+
+    obexd, cups, or anything using libcuse might be trying to claim hooks
+
+    Run: ``` lsof /dev/cuse ```
+
+    Patch udev to handle this symbolically
+
+Create a custom rule like:
+
+``` sudo nano /etc/udev/rules.d/99-cuse.rules ```
+
+``` KERNEL=="cuse", MODE="0666" ```
+CTRL+ O + Y SAVE EXIT
+
+``` sudo udevadm control --reload-rules ```
+``` sudo udevadm trigger ```
+
+``` grep -R cuse_init drivers/char/ ```
+
+OK NOW TO WIPE CUSE FROM DMESG
+``` sudo rmod cuse ```
+``` udevadm trigger --subsystem-match=char ```
+
+
+
+
+
+   
+
+   
+
 
 
 
