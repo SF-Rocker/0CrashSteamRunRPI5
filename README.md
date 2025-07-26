@@ -17,7 +17,7 @@ Go To Device Drivers -> Sound Card Support ->
 Hit Space Bar on Preclaim OSS device numbers 'Disable it with Space'
 Now * means Enable and M means Module, this don't have Module Option.
 
-#Preclaim OSS device numbers must be disabled, before building kernel to replace the kernel8.img for the 4kb page size kernel for gaming on the raspberry pi using the pi apps steam install with box86 and box64, still says stackable, will work on a fix for that too in the future.
+# Preclaim OSS device numbers must be disabled, before building kernel to replace the kernel8.img for the 4kb page size kernel for gaming on the raspberry pi using the pi apps steam install with box86 and box64, still says stackable, will work on a fix for that too in the future.
 
 # How i figured this out was enabling module features until i found it made it worse not making it a module for the CUSE and FUSE drivers in file systems, i found that loading modules .ko just to patch it every time i booted used a 509 major and 0 minor, now it loads
 
