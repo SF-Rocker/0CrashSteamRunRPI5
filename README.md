@@ -43,6 +43,63 @@ CONFIG_SND_SOC_HDMI_CODEC=n
 
 # Doing this makes sure alsa does not steal major numbers during steam running only disabled soC if your using an 3mm audio jack hat.
 
+# Full Tutorial
+Install Dependencies for recompiling the linux kernel
+``` sudo apt install bc bison flex libssl-dev make libc6-dev libncurses5-dev ```
+Clone the Raspberry Pi kernel source
+``` git clone --depth=1 https://github.com/raspberrypi/linux ```
+``` cd linux ```
+Apply the default config for Pi 3/4 (64-bit)
+``` make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- bcm2711_defconfig ```
+Disable OSS preclaim
+make ARCH=arm64 menuconfig
+Navigate to:
+Device Drivers → Sound card support → OSS Mixer API → Preclaim OSS device nodes
+Set it to N. "Blank"
+Build the kernel
+```make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image modules dtbs ```
+Install modules
+``` sudo make ARCH=arm64 modules_install ```
+Replace kernel8.img
+``` sudo cp arch/arm64/boot/Image /boot/kernel8.img ```
+``` sudo cp arch/arm64/boot/dts/broadcom/bcm2712-rpi-5-b.dtb /boot/ ```
+``` sudo cp arch/arm64/boot/dts/overlays/*.dtb* /boot/overlays/ ```
+``` sudo cp arch/arm64/boot/dts/overlays/README /boot/overlays/  ```
+If you want to include additional CM variants for testing or fallback, you could drop in:
+``` sudo cp arch/arm64/boot/dts/broadcom/bcm2712-rpi-cm5-cm5io.dtb /boot/ ```
+
+under [ALL] in /boot/firmware/config.txt where kernel=kernel8.img is replace it with:
+``` kernel=kernel8.img ```
+``` device_tree=bcm2712-rpi-5-b.dtb ``` 
+``` initramfs initramfs.img followkernel ```
+
+``` # Optional GPU and display tweaks ```
+``` dtoverlay=vc4-kms-v3d ```
+``` disable_overscan=1 ```
+# CTRL + O Rename file + Save
+# CTRL + X = Exit
+Reboot and verify
+after reboot check
+```uname -r ```
+
+
+# You should see Exact Match of Version & Patch Tag: 6.12.34+rpt-rpi-v8 isn’t a generic string — it reflects the Raspberry Pi Foundation’s patching (rpt) and the ARM64 kernel (rpi-v8), which only loads via kernel8.img. You had been building for that exact profile.
+If RPT is not in the kernel name, most likely the dtbs files were not copied correctly, those are needed with the .img files in the /boot directory for the pi to find the kernel8.img we renamed with cp command to boot successfully.
+
+ SKIP **** How to find dts directory if changed. 
+find arch/arm64/boot/dts -type f -name "*.dts" ****
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
