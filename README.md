@@ -1,7 +1,7 @@
 # 0CrashSteamRunRPI5
 Helps you rebuild the linux kernel to stop internal sound card effecting hdmi audio when playing steam. CUSE FUSE.
 
-  ┌─ Sound card support ──────────────────────────────────┐
+  ┌─ Sound card support ───┐
   │  Arrow keys navigate the menu.  <Enter> selects submenus ---> (or empty submenus       │  
   │  ----).  Highlighted letters are hotkeys.  Pressing <Y> includes, <N> excludes, <M>    │  
   │  modularizes features.  Press <Esc><Esc> to exit, <?> for Help, </> for Search.        │  
