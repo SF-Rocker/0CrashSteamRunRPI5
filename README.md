@@ -126,7 +126,7 @@ sf-rocker@raspberrypi:~ $
 
 so to give it some chmod privledges.
 
-``` sudo chmod 666 /dev/cuse ```
+``` sudo chmod 777 /dev/cuse ```
 # Unlocks cuse for other applications.
 
  Check active CUSE-based services
@@ -141,7 +141,7 @@ Create a custom rule like:
 
 ``` sudo nano /etc/udev/rules.d/99-cuse.rules ```
 
-``` KERNEL=="cuse", MODE="0666" ```
+``` KERNEL=="cuse", MODE="0777" ```
 CTRL+ O + Y SAVE EXIT
 
 ``` sudo udevadm control --reload-rules ```
