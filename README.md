@@ -1,4 +1,4 @@
-#Tutorial using sudo with read and write permissions for everyone, to use steam on startup.
+# Tutorial using sudo with read and write permissions for everyone, to use steam on startup.
 1. Move Downloaded .sh bash script to Documents folder.
 2. Move Downloaded .service file to this exact location: --> ("/etc/systemd/system/") # Where services Go
 3. or
