@@ -3,7 +3,7 @@ Description=My Startup Script
 After=network.target
 
 [Service]
-ExecStart=/home/sf-rocker/Documents/CuseErrorKernelModuleFix-Kernel/StartUp.sh
+ExecStart=/home/$USER/Documents/StartUp.sh
 /StartUp.sh
 Type=idle
 
