@@ -1,7 +1,6 @@
 # Tutorial using sudo with read and write permissions for everyone, to use steam on startup.
 1. Move Downloaded .sh bash script to Documents folder.
-2. Move Downloaded .service file to this exact location: --> ("/etc/systemd/system/")
-3. # Where services Go
+2. Move Downloaded .service file to this exact location: --> ("/etc/systemd/system/") # Where services Go
 4. or
 5. Open Terminal Type
 6. ```cd Downloads ```
@@ -18,8 +17,7 @@ type ```sudo snap install core```
 after finished and completed type ```clear```
 then run ```sudo snap install bash-language-server```
     & in the Documents folder go there now
-    ```cd -```
-     # Goes back one directory or to the Previous one.
+    ```cd -``` # Goes back one directory or to the Previous one.
     ```cd Documents```
     run ```sudo ./StartUp.sh```
     to see what code its throwing out you
