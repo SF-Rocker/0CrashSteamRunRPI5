@@ -24,5 +24,5 @@ then run ```sudo snap install bash-language-server```
     run ```ls -l /dev/cuse``` if you are successful it should show
     ```crwxrwxrwx 1 root root 10, 203 $DATE $TIME /dev/cuse```
     if it shows ```crw------- 1 root root 10, 203 $DATE $TIME /dev/cuse```
-    then you must have an error and manually debug it yourself, and make sure your kate text editor does't show any errors when launching.
+    then you must have an error and manually debug it yourself, and make sure your kate text editor doesn't show any errors when launching.
     
