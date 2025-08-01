@@ -1,0 +1,11 @@
+[Unit]
+Description=My Startup Script
+After=network.target
+
+[Service]
+ExecStart=/home/sf-rocker/Documents/CuseErrorKernelModuleFix-Kernel/StartUp.sh
+/StartUp.sh
+Type=idle
+
+[Install]
+WantedBy=multi-user.target
