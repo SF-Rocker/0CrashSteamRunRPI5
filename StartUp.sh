@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Explicit path to your real home, not /root
-log_path="/home/sf-rocker/Documents/CuseErrorKernelModuleFix-Kernel/cuse_log.txt"
+log_path="/home/$USER/Documents/cuse_log.txt"
 
 # 🌀 Phase 1: Check /dev/cuse and log status
 echo "CUSE check initiated at $(date)" >> "$log_path"
