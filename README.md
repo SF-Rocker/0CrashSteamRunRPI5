@@ -17,7 +17,7 @@ type ```sudo snap install core```
 after finished and completed type ```clear```
 then run ```sudo snap install bash-language-server```
     & in the Documents folder go there now
-    ```cd -``` #Goes back 1 directory or to the previous one.
+    ```cd -``` # Goes back 1 directory or to the previous one.
     ```cd Documents```
     run ```sudo ./StartUp.sh```
     to see what code its throwing out you
